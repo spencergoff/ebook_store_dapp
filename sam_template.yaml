@@ -1,0 +1,44 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: SAM Template for ebook_store_dapp
+
+Globals:
+  Function:
+    Timeout: 10
+
+Resources:
+  DownloadFile:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /
+            Method: get
+      Policies:
+        - arn:aws:iam::621544995223:policy/ECR-read
+        - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRoleForCloudFormation
+        - arn:aws:iam::aws:policy/SecretsManagerReadWrite
+        - arn:aws:iam::aws:policy/CloudWatchFullAccess
+      AutoPublishAlias: live
+      DeploymentPreference:
+        Type: LambdaCanary10Percent1Minute
+    Metadata:
+      Dockerfile: Dockerfile
+      DockerContext: ./
+
+Outputs:
+  DownloadFile:
+    Description: "API Gateway endpoint URL for the DownloadFile function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+  DownloadFile:
+    Description: "DownloadFile Lambda Function ARN"
+    Value: "DownloadFile.Arn"
+  DownloadFileIamRole:
+    Description: "Implicit IAM Role created for DownloadFile function"
+    Value: !GetAtt DownloadFileRole.Arn
