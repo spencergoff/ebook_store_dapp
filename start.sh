@@ -5,12 +5,13 @@ function main {
     file_hash="QmdLMnwpbi8xPFcpRGqsfHCRGVgovV3yAv8fUtoug66Wqj"
     check_internet_connection
     curl https://ipfs.io/ipfs/$file_hash
-    setup_ipfs
-    #add_pinata_peers
-    echo "~/.ipfs/config: "
-    cat ~/.ipfs/config
-    download_file
+    # setup_ipfs
+    # #add_pinata_peers
+    # echo "~/.ipfs/config: "
+    # cat ~/.ipfs/config
+    # download_file
     decrypt_file
+    cat "$file_hash."
 }
 
 function check_internet_connection {
@@ -40,7 +41,8 @@ function download_file {
 
 function decrypt_file {
     echo "Trying to decrypt $file_hash..."
-    gpg $file_hash
+    secret=$(python -c import get_secret; get_secret)
+    gpg --yes --batch --passphrase=[Enter your passphrase here] -c filename.txt
 }
 
 main

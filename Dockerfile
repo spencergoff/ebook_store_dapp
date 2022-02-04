@@ -2,6 +2,8 @@ FROM alpine:3.9.3
 COPY start.sh /start.sh
 RUN apk update \
     && apk add jq \
+    && apk add python3 \
+    && apk add py-pip \
     && apk add gnupg \
     && wget https://dist.ipfs.io/go-ipfs/v0.11.0/go-ipfs_v0.11.0_linux-amd64.tar.gz \
     && tar -xvzf go-ipfs_v0.11.0_linux-amd64.tar.gz \
@@ -13,4 +15,5 @@ RUN apk update \
     && apk add glibc-2.34-r0.apk \
     && chmod 777 /start.sh \
     && apk add curl
-CMD [ "./start.sh" ]
+RUN python3 -m pip install -r requirements.txt -t .
+CMD [ "python", "download_decrypt.py" ]
