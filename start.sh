@@ -4,7 +4,7 @@ set -ex
 function main {
     file_hash="QmdLMnwpbi8xPFcpRGqsfHCRGVgovV3yAv8fUtoug66Wqj"
     check_internet_connection
-    curl https://ipfs.io/ipfs/$file_hash
+    wget https://ipfs.io/ipfs/$file_hash
     setup_ipfs
     #add_pinata_peers
     echo "~/.ipfs/config: "
