@@ -5,7 +5,7 @@ function main {
     file_hash="QmdLMnwpbi8xPFcpRGqsfHCRGVgovV3yAv8fUtoug66Wqj"
     check_internet_connection
     setup_ipfs
-    add_pinata_peers
+    #add_pinata_peers
     echo "~/.ipfs/config: "
     cat ~/.ipfs/config
     download_file
