@@ -1,7 +1,5 @@
 FROM alpine:3.9.3
-COPY --chmod=700 test.txt.gpg /test.txt.gpg
-COPY --chmod=700 start.sh /start.sh
-COPY --chmod=700 pinata_peers.json /pinata_peers.json
+COPY start.sh /start.sh
 RUN apk update \
     && apk add jq \
     && apk add gnupg \
