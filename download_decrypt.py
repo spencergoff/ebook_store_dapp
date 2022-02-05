@@ -6,8 +6,8 @@ import requests
 
 gpg = gnupg.GPG()
 file_hash = 'QmdLMnwpbi8xPFcpRGqsfHCRGVgovV3yAv8fUtoug66Wqj'
-encrypted_file_path = 'encrypted_file.txt'
-decrypted_file_path = 'decrypted_file.txt'
+encrypted_file_path = '/tmp/encrypted_file.txt'
+decrypted_file_path = '/tmp/decrypted_file.txt'
 gpg.encoding = 'utf-8'
 
 def main(event, context):
