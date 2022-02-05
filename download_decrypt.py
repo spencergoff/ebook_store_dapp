@@ -10,7 +10,7 @@ encrypted_file_path = 'encrypted_file.txt'
 decrypted_file_path = 'decrypted_file.txt'
 gpg.encoding = 'utf-8'
 
-def main():
+def main(event, context):
     download_file()
     decrypt_the_file()
 
