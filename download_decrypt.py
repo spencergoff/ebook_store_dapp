@@ -28,9 +28,10 @@ def decrypt_the_file():
         encrypted_string = str(f.read())
     print(f'encrypted_string: {encrypted_string}')
     f = open(decrypted_file_path,"w+").close()
-    decryption = gpg.decrypt(message=encrypted_string, passphrase=secret, output=decrypted_file_path)
+    decryption = gpg.decrypt(message=encrypted_string, passphrase=secret)
     print(f'decryption.status: {decryption.status} | decryption.ok: {decryption.ok} | decryption.data: {decryption.data}')
-    with open(decrypted_file_path, 'r') as f:
+    with open(decrypted_file_path, 'w+') as f:
+        f.write(str(decryption))
         print(f'decrypted_file: {f.read()}')
 
 def get_secret(secret_name):
