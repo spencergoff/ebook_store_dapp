@@ -27,7 +27,8 @@ def decrypt_the_file():
     with open(encrypted_file_path, 'r+') as f:
         encrypted_string = str(f.read())
     print(f'encrypted_string: {encrypted_string}')
-    decryption = gpg.decrypt(message=encrypted_string, passphrase=secret)
+    f = open(decrypted_file_path,"w+").close()
+    decryption = gpg.decrypt(message=encrypted_string, passphrase=secret, output=decrypted_file_path)
     print(f'decryption.status: {decryption.status} | decryption.ok: {decryption.ok} | decryption.data: {decryption.data}')
     with open(decrypted_file_path, 'r') as f:
         print(f'decrypted_file: {f.read()}')
@@ -54,4 +55,4 @@ def extract_secret_from_payload(secret_name, secret_payload):
     return secret_value
 
 if __name__ == '__main__':
-    main()
+    main(None, None)
