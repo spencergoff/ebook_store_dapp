@@ -30,7 +30,7 @@ def decrypt_the_file():
         encrypted_string = str(f.read())
     print(f'encrypted_string: {encrypted_string}')
     f = open(decrypted_file_path,"w+").close()
-    decryption = gpg.decrypt(message=encrypted_string, passphrase=secret, always_trust=True, options=['yes'])
+    decryption = gpg.decrypt(message=encrypted_string, passphrase=secret, always_trust=True)
     print(f'decryption.status: {decryption.status} | decryption.ok: {decryption.ok} | decryption.data: {decryption.data}')
     with open(decrypted_file_path, 'w+') as f:
         f.write(str(decryption))
