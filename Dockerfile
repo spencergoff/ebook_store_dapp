@@ -3,4 +3,4 @@ COPY download_decrypt.py requirements.txt start.sh ./
 RUN python3.9 -m pip install -r requirements.txt -t .
 RUN yum install gpg
 RUN type gpg
-ENTRYPOINT [ "./start.sh" ]
+CMD [ "./start.sh" ]
