@@ -4,11 +4,13 @@ import gnupg
 import pickle
 import requests
 
-gpg = gnupg.GPG()
+print('Executing the global commands...')
+gpg = gnupg.GPG(verbose=True)
 file_hash = 'QmdLMnwpbi8xPFcpRGqsfHCRGVgovV3yAv8fUtoug66Wqj'
 encrypted_file_path = '/tmp/encrypted_file.txt'
 decrypted_file_path = '/tmp/decrypted_file.txt'
 gpg.encoding = 'utf-8'
+
 
 def main(event, context):
     download_file()
@@ -28,7 +30,7 @@ def decrypt_the_file():
         encrypted_string = str(f.read())
     print(f'encrypted_string: {encrypted_string}')
     f = open(decrypted_file_path,"w+").close()
-    decryption = gpg.decrypt(message=encrypted_string, passphrase=secret, always_trust=True)
+    decryption = gpg.decrypt(message=encrypted_string, passphrase=secret, always_trust=True, options=['yes'])
     print(f'decryption.status: {decryption.status} | decryption.ok: {decryption.ok} | decryption.data: {decryption.data}')
     with open(decrypted_file_path, 'w+') as f:
         f.write(str(decryption))
