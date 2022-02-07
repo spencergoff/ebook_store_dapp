@@ -13,13 +13,22 @@ gpg.encoding = 'utf-8'
 
 def main(event, context):
     download_file()
-    decrypt_the_file()
+    decrypt_with_bash()
 
 def download_file():
     file_response = requests.get(f'https://ipfs.io/ipfs/{file_hash}')
     print(f'file_response.text: {file_response.text}')
     with open(encrypted_file_path, 'w') as f:
         f.write(file_response.text)
+
+def decrypt_with_bash():
+    print('Made it to decrypt_with_bash!')
+    secret = get_secret('ebook_decryption_secret')
+    print(f'len(secret): {len(secret)}')
+    print(f'encrypted_string: {encrypted_string}')
+    os.system(f'gpg --yes --batch --passphrase={secret} --output {decrypted_file_path} --decrypt {encrypted_file_path}')
+    with open(decrypted_file_path, 'w+') as f:
+        print(f'decrypted_file: {f.read()}')
 
 def decrypt_the_file():
     print('Made it to decrypt_file!')
