@@ -3,7 +3,7 @@ import boto3
 import requests
 from cryptography.fernet import Fernet
 
-def main():
+def main(event, context):
     content_id = 'QmXjvurAQ3MLpxGQM6NvdgPC8uK1YndmEBmRzCEJJUgEz2'
     key = get_key('ebook_decryption_secret')
     decrypt_content_with_key(content_id, key)
@@ -52,4 +52,4 @@ def encrypt_message(message):
         print(f'Wrote the encrypted message to {encrypted_file_path}')
 
 if __name__ == '__main__':
-    main()
+    main(None, None)
