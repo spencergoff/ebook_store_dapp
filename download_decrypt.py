@@ -1,50 +1,23 @@
-import os
 import json
 import boto3
-import gnupg
 import requests
-
-print('Executing the global commands...')
-gpg = gnupg.GPG(gnupghome='/tmp', verbose=True)
-file_hash = 'QmdLMnwpbi8xPFcpRGqsfHCRGVgovV3yAv8fUtoug66Wqj'
-encrypted_file_path = '/tmp/encrypted_file.txt'
-decrypted_file_path = '/tmp/decrypted_file.txt'
-gpg.encoding = 'utf-8'
+from cryptography.fernet import Fernet
 
 def main(event, context):
-    download_file()
-    decrypt_with_bash()
+    content_id = 'QmXjvurAQ3MLpxGQM6NvdgPC8uK1YndmEBmRzCEJJUgEz2'
+    key = get_key('ebook_decryption_secret')
+    decrypt_content_with_key(content_id, key)
 
-def download_file():
-    file_response = requests.get(f'https://ipfs.io/ipfs/{file_hash}')
-    print(f'file_response.text: {file_response.text}')
-    with open(encrypted_file_path, 'w') as f:
-        f.write(file_response.text)
+def decrypt_content_with_key(content_id, key):
+    f = Fernet(key)
+    url = f'https://ipfs.io/ipfs/{content_id}'
+    print(f'Trying to get encrypted message from: {url}')
+    encrypted_message = requests.get(url).text
+    encrypted_message_as_bytes = encrypted_message.encode('utf-8')
+    decrypted_message = f.decrypt(encrypted_message_as_bytes)
+    print(f'decrypted_message: {decrypted_message}')
 
-def decrypt_with_bash():
-    print('Made it to decrypt_with_bash!')
-    secret = get_secret('ebook_decryption_secret')
-    print(f'len(secret): {len(secret)}')
-    print(f'encrypted_string: {encrypted_string}')
-    os.system(f'gpg --yes --batch --passphrase={secret} --output {decrypted_file_path} --decrypt {encrypted_file_path}')
-    with open(decrypted_file_path, 'w+') as f:
-        print(f'decrypted_file: {f.read()}')
-
-def decrypt_the_file():
-    print('Made it to decrypt_file!')
-    secret = get_secret('ebook_decryption_secret')
-    print(f'len(secret): {len(secret)}')
-    with open(encrypted_file_path, 'r+') as f:
-        encrypted_string = str(f.read())
-    print(f'encrypted_string: {encrypted_string}')
-    f = open(decrypted_file_path,"w+").close()
-    decryption = gpg.decrypt(message=encrypted_string, passphrase=secret, always_trust=True)
-    print(f'decryption.status: {decryption.status} | decryption.ok: {decryption.ok} | decryption.data: {decryption.data}')
-    with open(decrypted_file_path, 'w+') as f:
-        f.write(str(decryption))
-        print(f'decrypted_file: {f.read()}')
-
-def get_secret(secret_name):
+def get_key(secret_name):
     print(f'Made it to get_secret with secret_name: {secret_name}')
     region_name = 'us-west-2'
     session = boto3.session.Session()
@@ -64,6 +37,16 @@ def extract_secret_from_payload(secret_name, secret_payload):
     else:
         secret_value = all_secrets[secret_name]
     return secret_value
+
+def encrypt_message(message):
+    print(f'message to encrypt: {message}')
+    encrypted_file_path = '/tmp/fernet_encrypted.txt'
+    key = Fernet.generate_key()
+    f = Fernet(key)
+    encrypted_message = f.encrypt(message)
+    with open(encrypted_file_path, 'wb') as f:
+        f.write(encrypted_message)
+        print(f'Wrote the encrypted message to {encrypted_file_path}')
 
 if __name__ == '__main__':
     main(None, None)
