@@ -45,7 +45,6 @@ def get_secret(secret_name):
     )
     secret_payload = client.get_secret_value(SecretId=secret_name)
     secret_value = extract_secret_from_payload(secret_name, secret_payload)
-    os.environ['secret_value'] = secret_value
     return secret_value
 
 def extract_secret_from_payload(secret_name, secret_payload):
