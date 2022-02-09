@@ -20,6 +20,10 @@ Resources:
           Properties:
             Path: /
             Method: get
+            RequestParameters:
+              - method.request.querystring.mail:
+                Required: true
+                Caching: true
       Policies:
         - arn:aws:iam::621544995223:policy/ECR-read
         - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRoleForCloudFormation
