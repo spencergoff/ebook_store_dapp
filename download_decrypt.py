@@ -7,7 +7,12 @@ def main(event, context):
     content_id = 'QmXjvurAQ3MLpxGQM6NvdgPC8uK1YndmEBmRzCEJJUgEz2'
     key = get_key('ebook_decryption_secret')
     decrypted_message = decrypt_content_with_key(content_id, key)
-    response = {'decrypted_message': decrypted_message}
+    response = {
+        'isBase64Encoded': False,
+        'statusCode': 200,
+        'headers': {},
+        'body': decrypted_message
+    }
     return response
 
 def decrypt_content_with_key(content_id, key):
