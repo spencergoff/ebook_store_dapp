@@ -13,6 +13,7 @@ def main(event, context):
         'headers': {},
         'body': decrypted_message
     }
+    print(f'response: {response}')
     return response
 
 def decrypt_content_with_key(content_id, key):
@@ -23,7 +24,7 @@ def decrypt_content_with_key(content_id, key):
     encrypted_message_as_bytes = encrypted_message.encode('utf-8')
     decrypted_message = f.decrypt(encrypted_message_as_bytes)
     print(f'decrypted_message: {decrypted_message}')
-    decrypted_message
+    return decrypted_message
 
 def get_key(secret_name):
     print(f'Made it to get_secret with secret_name: {secret_name}')
