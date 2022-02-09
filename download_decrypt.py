@@ -5,13 +5,15 @@ from cryptography.fernet import Fernet
 
 def main(event, context):
     content_id = 'QmXjvurAQ3MLpxGQM6NvdgPC8uK1YndmEBmRzCEJJUgEz2'
+    address = event['queryStringParameters']['address']
     key = get_key('ebook_decryption_secret')
     decrypted_message = decrypt_content_with_key(content_id, key)
+    body = f'decrypted_message: {decrypted_message} | address: {address}'
     response = {
         'isBase64Encoded': False,
         'statusCode': 200,
         'headers': {},
-        'body': decrypted_message
+        'body': body
     }
     print(f'response: {response}')
     return response
