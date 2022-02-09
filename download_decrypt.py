@@ -6,8 +6,9 @@ from cryptography.fernet import Fernet
 def main(event, context):
     content_id = 'QmXjvurAQ3MLpxGQM6NvdgPC8uK1YndmEBmRzCEJJUgEz2'
     key = get_key('ebook_decryption_secret')
-    decrypted_content = decrypt_content_with_key(content_id, key)
-    return decrypted_content
+    decrypted_message = decrypt_content_with_key(content_id, key)
+    response = {'decrypted_message': decrypted_message}
+    return response
 
 def decrypt_content_with_key(content_id, key):
     f = Fernet(key)
