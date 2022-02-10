@@ -20,6 +20,8 @@ Resources:
           Properties:
             Path: /
             Method: get
+            Cors:
+            AllowOrigin: "'http://ebookstoredappbucket.s3-website-us-west-2.amazonaws.com/'"
       Policies:
         - arn:aws:iam::621544995223:policy/ECR-read
         - arn:aws:iam::aws:policy/service-role/AWSCodeDeployRoleForCloudFormation
@@ -28,8 +30,6 @@ Resources:
       AutoPublishAlias: live
       DeploymentPreference:
         Type: LambdaCanary10Percent1Minute
-      Cors:
-        AllowOrigin: "'http://ebookstoredappbucket.s3-website-us-west-2.amazonaws.com/'"
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./
