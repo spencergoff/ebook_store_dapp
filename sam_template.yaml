@@ -5,7 +5,7 @@ Description: SAM Template for ebook_store_dapp
 
 Globals:
   Function:
-    Timeout: 10
+    Timeout: 30
 
 Resources:
   DownloadFile:
@@ -28,6 +28,8 @@ Resources:
       AutoPublishAlias: live
       DeploymentPreference:
         Type: LambdaCanary10Percent1Minute
+      Cors:
+        AllowOrigin: "'http://ebookstoredappbucket.s3-website-us-west-2.amazonaws.com/'"
     Metadata:
       Dockerfile: Dockerfile
       DockerContext: ./

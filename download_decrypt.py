@@ -6,6 +6,7 @@ from cryptography.fernet import Fernet
 def main(event, context):
     content_id = 'QmXjvurAQ3MLpxGQM6NvdgPC8uK1YndmEBmRzCEJJUgEz2'
     address = event['queryStringParameters']['address']
+    print(f'address: {address}')
     key = get_key('ebook_decryption_secret')
     decrypted_message = decrypt_content_with_key(content_id, key)
     body = f'decrypted_message: {decrypted_message} | address: {address}'
