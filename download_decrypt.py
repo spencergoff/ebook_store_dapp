@@ -5,6 +5,7 @@ from cryptography.fernet import Fernet
 
 def main(event, context):
     content_id = 'QmXjvurAQ3MLpxGQM6NvdgPC8uK1YndmEBmRzCEJJUgEz2'
+    print(f'event: {event}')
     try:
         address = event['queryStringParameters']['address']
     except:
