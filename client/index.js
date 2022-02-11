@@ -1,7 +1,7 @@
 document.getElementById('connectButton', connect);
 
 function connect() {
-    alert('Made it to connect()');
+    alert('Made it to connect2()');
     ethereum
         .request({ method: 'eth_requestAccounts' })
         .then(function (accountInfo) {
@@ -9,8 +9,8 @@ function connect() {
             alert('Account address: ' + address);
             var api_request = new XMLHttpRequest();
             alert('Trying to open api_request...');
-            //api_request.setRequestHeader('Access-Control-Allow-Headers', '')
-            api_request.open('GET', 'https://i4d36m961a.execute-api.us-west-2.amazonaws.com/Prod?address=123', true);  // `false` makes the request synchronous
+            //qapi_request.setRequestHeader('Access-Control-Allow-Headers', '')
+            api_request.open('GET', 'https://i4d36m961a.execute-api.us-west-2.amazonaws.com/Prod', true);  // `false` makes the request synchronous
             alert('Trying to send api_request...')
             api_request.send()
 
