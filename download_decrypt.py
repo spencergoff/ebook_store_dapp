@@ -14,7 +14,7 @@ def main(event, context):
     decrypted_message = decrypt_content_with_key(content_id, key)
     body = f'decrypted_message: {decrypted_message} | address: {address}'
     headers = {
-        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Origin': 'http://ebookstoredappbucket.s3-website-us-west-2.amazonaws.com/',
     }
     response = {
         'isBase64Encoded': False,
