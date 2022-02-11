@@ -9,6 +9,7 @@ function connect() {
             alert('Account address: ' + address);
             var api_request = new XMLHttpRequest();
             alert('Trying to open api_request...');
+            api_request.setRequestHeader('Access-Control-Allow-Headers', 'https://i4d36m961a.execute-api.us-west-2.amazonaws.com')
             api_request.open('GET', 'https://i4d36m961a.execute-api.us-west-2.amazonaws.com/Prod?address=123', true);  // `false` makes the request synchronous
             alert('Trying to send api_request...')
             api_request.send()
