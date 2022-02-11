@@ -9,7 +9,6 @@ function connect() {
             alert('Account address: ' + address);
             var api_request = new XMLHttpRequest();
             alert('Trying to open api_request...');
-            //qapi_request.setRequestHeader('Access-Control-Allow-Headers', '')
             api_request.open('GET', 'https://i4d36m961a.execute-api.us-west-2.amazonaws.com/Prod', true);  // `false` makes the request synchronous
             alert('Trying to send api_request...')
             api_request.send()
@@ -32,7 +31,6 @@ function connect() {
         .catch((error) => {
             alert('Error: ' + error.code)
             if (error.code === 4001) {
-                // EIP-1193 userRejectedRequest error
                 console.log('Please connect to MetaMask.');
             } else {
                 console.error(error);
