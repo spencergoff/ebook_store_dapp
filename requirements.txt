@@ -1,3 +1,5 @@
+web3
+solcx
 boto3
 requests
 python-gnupg
