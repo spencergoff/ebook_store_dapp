@@ -1,6 +1,6 @@
 web3
-solcx
 boto3
 requests
+py-solc-x
 python-gnupg
 cryptography

@@ -3,7 +3,7 @@ import boto3
 import requests
 from web3 import Web3
 from cryptography.fernet import Fernet
-from solcx import compile_standard, install_solc
+from solcx import compile_standard
 
 def main(event, context):
     print(f'event: {event}')
