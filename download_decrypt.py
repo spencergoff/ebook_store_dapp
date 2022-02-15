@@ -4,6 +4,7 @@ import requests
 from web3 import Web3
 from cryptography.fernet import Fernet
 from solcx import compile_standard
+install_solc('0.6.0')
 
 def main(event, context):
     print(f'event: {event}')
