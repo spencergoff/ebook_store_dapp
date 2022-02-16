@@ -4,7 +4,7 @@ import boto3
 import requests
 import subprocess
 
-print("\n".join(sys.path)
+print("\n".join(sys.path))
 
 result = subprocess.run(['ls', '/var/lang/lib/python3.9/'], stdout=subprocess.PIPE)
 print(f'result.stdout /var/lang/lib/python3.9/: {result.stdout}')
