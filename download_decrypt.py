@@ -1,6 +1,11 @@
 import json
 import boto3
 import requests
+import subprocess
+
+result = subprocess.run(['ls', '/usr/local/bin/'], stdout=subprocess.PIPE)
+print(f'result.stdout: {result.stdout}')
+
 from web3 import Web3
 from cryptography.fernet import Fernet
 from solcx import compile_standard, install_solc
