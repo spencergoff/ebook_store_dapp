@@ -1,33 +1,8 @@
-import sys
 import json
 import boto3
 import requests
-import subprocess
 from web3 import Web3
-
-print("\n".join(sys.path))
-
-result = subprocess.run(['ls', '/var/lang/lib/python3.9/site-packages/'], stdout=subprocess.PIPE)
-print(f'result.stdout pip3.9 show web3: {result.stdout}')
-
-result = subprocess.run(['ls', '/opt/python/lib/python3.9/site-packages/'], stdout=subprocess.PIPE)
-print(f'result.stdout pip3.9 show web3: {result.stdout}')
-
-result = subprocess.run(['pip3.9', 'show', 'web3'], stdout=subprocess.PIPE)
-print(f'result.stdout pip3.9 show web3: {result.stdout}')
-
-result = subprocess.run(['ls', '/var/lang/lib/python3.9/'], stdout=subprocess.PIPE)
-print(f'result.stdout /var/lang/lib/python3.9/: {result.stdout}')
-
-result = subprocess.run(['ls', '/usr/local/'], stdout=subprocess.PIPE)
-print(f'result.stdout /usr/local/: {result.stdout}')
-
-result = subprocess.run(['ls', '/usr/local/bin/'], stdout=subprocess.PIPE)
-print(f'result.stdout /usr/local/bin/: {result.stdout}')
-
 from cryptography.fernet import Fernet
-from solcx import compile_standard, install_solc
-install_solc('0.6.0')
 
 def main(event, context):
     print(f'event: {event}')
@@ -71,23 +46,8 @@ def check_if_requester_has_access(requester_wallet_address):
         return False
 
 def get_application_binary_interface(contract_file_path):
-    with open(contract_file_path, 'r') as f:
-        permissions_file = f.read()
-    compiled_sol = compile_standard(
-        {
-            'language': 'Solidity',
-            'sources': {contract_file_path: {'content': permissions_file}},
-            'settings': {
-                'outputSelection': {
-                    '*': {
-                        '*': ['abi', 'metadata', "evm.bytecode", 'evm.sourceMap']}
-                }
-            }
-        },
-        solc_version = '0.6.0',
-    )
-    with open('compiled_code.json', 'w') as file:
-        json.dump(compiled_sol, file)
+    with open('compiled_code.json', 'r') as file:
+        compiled_sol = json.load(file)
     application_binary_interface = compiled_sol['contracts'][contract_file_path]['FilePermissions']['abi']
     return application_binary_interface
 
