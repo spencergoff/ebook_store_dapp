@@ -1,10 +1,22 @@
+import sys
 import json
 import boto3
 import requests
 import subprocess
 
+print("\n".join(sys.path)
+
+result = subprocess.run(['ls', '/var/lang/lib/python3.9/'], stdout=subprocess.PIPE)
+print(f'result.stdout /var/lang/lib/python3.9/: {result.stdout}')
+
+result = subprocess.run(['ls', '/usr/local/'], stdout=subprocess.PIPE)
+print(f'result.stdout /usr/local/: {result.stdout}')
+
 result = subprocess.run(['ls', '/usr/local/bin/'], stdout=subprocess.PIPE)
-print(f'result.stdout: {result.stdout}')
+print(f'result.stdout /usr/local/bin/: {result.stdout}')
+
+result = subprocess.run(['ls', '/var/lang/bin/python3.9/'], stdout=subprocess.PIPE)
+print(f'result.stdout /var/lang/bin/python3.9/: {result.stdout}')
 
 from web3 import Web3
 from cryptography.fernet import Fernet
