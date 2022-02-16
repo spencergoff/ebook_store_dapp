@@ -7,7 +7,7 @@ from web3 import Web3
 
 print("\n".join(sys.path))
 
-result = subprocess.run(['pip3', 'show', 'web3'], stdout=subprocess.PIPE)
+result = subprocess.run(['pip', 'show', 'web3'], stdout=subprocess.PIPE)
 print(f'result.stdout pip3 show web3: {result.stdout}')
 
 result = subprocess.run(['ls', '/var/lang/lib/python3.9/'], stdout=subprocess.PIPE)
