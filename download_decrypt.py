@@ -3,6 +3,7 @@ import json
 import boto3
 import requests
 import subprocess
+from web3 import Web3
 
 print("\n".join(sys.path))
 
@@ -18,7 +19,6 @@ print(f'result.stdout /usr/local/: {result.stdout}')
 result = subprocess.run(['ls', '/usr/local/bin/'], stdout=subprocess.PIPE)
 print(f'result.stdout /usr/local/bin/: {result.stdout}')
 
-from web3 import Web3
 from cryptography.fernet import Fernet
 from solcx import compile_standard, install_solc
 install_solc('0.6.0')
