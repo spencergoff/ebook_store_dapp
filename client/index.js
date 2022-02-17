@@ -9,8 +9,9 @@ function connect() {
             alert('Account address: ' + address);
             var api_request = new XMLHttpRequest();
             alert('Trying to open api_request...');
-            api_request.open('GET', 'https://i4d36m961a.execute-api.us-west-2.amazonaws.com/Prod?address=' + address, true);  // `false` makes the request synchronous
-            alert('Trying to send api_request...')
+            url = 'https://i4d36m961a.execute-api.us-west-2.amazonaws.com/Prod?address=' + address
+            api_request.open('GET', url, true);  // `false` makes the request synchronous
+            alert('Trying to send api_request to ' + url)
             api_request.send()
 
             api_request.onload = function () {
