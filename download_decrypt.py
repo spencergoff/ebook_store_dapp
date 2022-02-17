@@ -31,7 +31,7 @@ def extract_address_from_event(event):
     return address
 
 def check_if_requester_has_access(requester_wallet_address):
-    deployed_contract_address = '0x0147fe45f5d96a6d0055bc89721f25da514e6aac'
+    deployed_contract_address = Web3.toChecksumAddress('0x0147fe45f5d96a6d0055bc89721f25da514e6aac')
     contract_file_path = 'permissions.sol'
     application_binary_interface = get_application_binary_interface(contract_file_path)
     w3 = Web3(Web3.HTTPProvider('https://goerli.infura.io/v3/e5b0c5087555433a8b4e82cc739bc0ab'))
