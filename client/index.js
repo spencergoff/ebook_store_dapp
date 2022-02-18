@@ -1,32 +1,28 @@
 document.getElementById('connectButton', connect);
 
 function connect() {
-    alert('Made it to connect2()');
+    console.log('Handling connect() event');
     ethereum
         .request({ method: 'eth_requestAccounts' })
         .then(function (accountInfo) {
             var address = accountInfo[0];
-            alert('Account address: ' + address);
+            console.log('The requester\'s wallet address is: ' + address);
             var api_request = new XMLHttpRequest();
-            alert('Trying to open api_request...');
             url = 'https://i4d36m961a.execute-api.us-west-2.amazonaws.com/Prod?address=' + address
-            api_request.open('GET', url, true);  // `false` makes the request synchronous
+            api_request.open('GET', url, true);  // `true` makes the request asynchronous
             alert('Trying to send api_request to ' + url)
             api_request.send()
 
             api_request.onload = function () {
-                alert('Made it inside onload')
-                alert('request.status: ' + api_request.status + ' | request.responseText: ' + api_request.responseText);
+                console.log('Loading...')
             };
 
             api_request.onprogress = function (event) {
-                alert('Made it inside onprogress')
-                alert('request.status: ' + api_request.status + ' | request.responseText: ' + api_request.responseText);
+                console.log('Progressing...')
             };
 
             api_request.onerror = function () {
-                alert('Made it inside onerror')
-                alert('request.status: ' + api_request.status + ' | request.responseText: ' + api_request.responseText);
+                alert('There was an error. request.status: ' + api_request.status + ' | request.responseText: ' + api_request.responseText)
             };
         })
         .catch((error) => {
