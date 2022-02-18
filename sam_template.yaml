@@ -5,7 +5,7 @@ Description: SAM Template for ebook_store_dapp
 
 Globals:
   Function:
-    Timeout: 10
+    Timeout: 20
 
 Resources:
   DownloadFile:
