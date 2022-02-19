@@ -10,12 +10,12 @@ def main(event, context):
     requester_wallet_address = extract_address_from_event(event)
     requester_has_access = check_if_requester_has_access(requester_wallet_address)
     print(f'requester_has_access: {requester_has_access}')
-    if requester_has_access:
+    if requester_has_access == True:
         key = get_key('ebook_decryption_secret')
         decrypted_message = decrypt_content_with_key(content_id, key)
         body = f'The secret message is: {decrypted_message}'
     else:
-        body = f'You don\t have access to view the secret message. Try sending eth to {0x0147fe45f5d96a6d0055bc89721f25da514e6aac}'
+        body = 'You don\t have access to view the secret message. Try sending eth to 0x0147fe45f5d96a6d0055bc89721f25da514e6aac'
     headers = {
         'Access-Control-Allow-Origin': 'http://ebookstoredappbucket.s3-website-us-west-2.amazonaws.com'
     }
@@ -30,10 +30,11 @@ def main(event, context):
 
 def extract_address_from_event(event):
     address = event['queryStringParameters']['address']
-    print(f'address: {address}')
+    print(f'Requester address: {address}')
     return address
 
 def check_if_requester_has_access(requester_wallet_address):
+    print(f'Checking if requester has access: {requester_wallet_address}')
     deployed_contract_address = Web3.toChecksumAddress('0x0147fe45f5d96a6d0055bc89721f25da514e6aac')
     contract_file_path = 'permissions.sol'
     application_binary_interface = get_application_binary_interface(contract_file_path)
