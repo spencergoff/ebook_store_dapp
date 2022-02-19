@@ -5,7 +5,7 @@ Description: SAM Template for ebook_store_dapp
 
 Globals:
   Function:
-    Timeout: 10
+    Timeout: 20
 
 Resources:
   DownloadFile:
@@ -29,7 +29,7 @@ Resources:
       DeploymentPreference:
         Type: LambdaCanary10Percent1Minute
     Metadata:
-      Dockerfile: Dockerfile
+      Dockerfile: decryption_service/Dockerfile
       DockerContext: ./
 
 Outputs:
