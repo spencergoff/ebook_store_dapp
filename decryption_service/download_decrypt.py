@@ -42,7 +42,7 @@ def check_if_requester_has_access(requester_wallet_address):
     deployed_contract = w3.eth.contract(address=deployed_contract_address, abi=application_binary_interface)
     wallet_addresses_with_permission = deployed_contract.functions.get_customers().call()
     print(f'wallet_addresses_with_permission: {wallet_addresses_with_permission}')
-    if requester_wallet_address in wallet_addresses_with_permission:
+    if str(requester_wallet_address) in wallet_addresses_with_permission:
         return True
     else:
         return False
