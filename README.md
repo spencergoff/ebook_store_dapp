@@ -20,4 +20,17 @@ The decryption service is defined in the decryption_service directory, and the b
 
 The service is currently deployed on a centralized platform, AWS, until I can find a decentralized solution to storing the secret key. Specifically, it's deployed in a Docker-based Lambda function as defined in sam_template.yaml and Dockerfile. The secret key is stored in AWS Secrets Manager. 
 
-The encrypted file is pinned using Pinata, an IPFS pinning service, to ensure that it is always available. 
+The encrypted file is pinned using Pinata, an IPFS pinning service, to ensure that it is always available.
+
+# Web Client
+
+To interact with this project, users can go to http://ebookstoredappbucket.s3-website-us-west-2.amazonaws.com/. 
+
+![Screen Shot 2022-02-19 at 10 45 09 AM](https://user-images.githubusercontent.com/14855088/154814611-c75c2f07-d067-46f2-818f-3539e7e139cf.png)
+
+If the user has a MetaMask plugin and is logged in, then they can click the "Download content" button and see an alert that either displays the decrypted secret message or informs them that they don't have access and should send wei to the smart contract.
+
+![Screen Shot 2022-02-19 at 10 49 52 AM](https://user-images.githubusercontent.com/14855088/154814752-2b160747-7f65-492e-af4b-02672f66667b.png)
+
+
+
