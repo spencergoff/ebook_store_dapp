@@ -47,6 +47,7 @@ def check_if_requester_has_access(requester_wallet_address):
         return True
     else:
         print('The requesting wallet does NOT have permission to access the secret message.')
+        print(f'requester_wallet_address: {requester_wallet_address} | wallet_addresses_with_permission[0]: {wallet_addresses_with_permission[0]}')
         return False
 
 def get_application_binary_interface(contract_file_path):
