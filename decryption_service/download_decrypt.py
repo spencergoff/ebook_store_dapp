@@ -42,13 +42,13 @@ def check_if_requester_has_access(requester_wallet_address):
     deployed_contract = w3.eth.contract(address=deployed_contract_address, abi=application_binary_interface)
     wallet_addresses_with_permission = list(deployed_contract.functions.get_customers().call())
     print(f'wallet_addresses_with_permission: {wallet_addresses_with_permission}')
-    if str(wallet_addresses_with_permission[0])[2:] == str(requester_wallet_address)[2:]:
+    if str(wallet_addresses_with_permission[0]) != str(requester_wallet_address):
+        print('The requesting wallet does NOT have permission to access the secret message.')
+        print(f'requester_wallet_address: {requester_wallet_address} | wallet_addresses_with_permission[0]: {wallet_addresses_with_permission[0]}')
+        return False
+    else:
         print('The requesting wallet has permission to access the secret message.')
         return True
-    else:
-        print('The requesting wallet does NOT have permission to access the secret message.')
-        print(f'requester_wallet_address[2:]: {requester_wallet_address[2:]} | wallet_addresses_with_permission[0][2:]: {wallet_addresses_with_permission[0][2:]}')
-        return False
 
 def get_application_binary_interface(contract_file_path):
     with open('compiled_contract.json', 'r') as file:
