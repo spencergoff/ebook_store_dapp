@@ -12,7 +12,7 @@ def main(event, context):
     print(f'requester_has_access: {requester_has_access}')
     key = get_key('ebook_decryption_secret')
     decrypted_message = decrypt_content_with_key(content_id, key)
-    body = f'decrypted_message: {decrypted_message} | address: {requester_wallet_address}'
+    body = f'{decrypted_message}'
     headers = {
         'Access-Control-Allow-Origin': 'http://ebookstoredappbucket.s3-website-us-west-2.amazonaws.com'
     }
