@@ -7,7 +7,6 @@ from cryptography.fernet import Fernet
 def main(event, context):
     print(f'event: {event}')
     content_id = 'QmXjvurAQ3MLpxGQM6NvdgPC8uK1YndmEBmRzCEJJUgEz2'
-    test_string_comparison()
     requester_wallet_address = extract_address_from_event(event)
     requester_has_access = check_if_requester_has_access(requester_wallet_address)
     print(f'requester_has_access: {requester_has_access}')
@@ -29,15 +28,6 @@ def main(event, context):
     print(f'response: {response}')
     return response
 
-def test_string_comparison():
-    string1 = '0xasdf'
-    string2 = '0xasdf'
-    print(f'string1: {string1} | string2: {string2}')
-    if string1 == string2:
-        print('The strings are equal!')
-    else:
-        print('The strings are NOT equal.')
-
 def extract_address_from_event(event):
     address = str(event['queryStringParameters']['address'])
     print(f'Requester address: {address}')
@@ -52,17 +42,15 @@ def check_if_requester_has_access(requester_wallet_address):
     deployed_contract = w3.eth.contract(address=deployed_contract_address, abi=application_binary_interface)
     wallet_addresses_with_permission = list(deployed_contract.functions.get_customers().call())
     print(f'wallet_addresses_with_permission: {wallet_addresses_with_permission}')
-    string1 = int(requester_wallet_address, 0)
-    string2 = int(wallet_addresses_with_permission[0], 0)
-    print(f'string1: {string1} | string2: {string2}')
-    if str(string1).strip() != str(string2).strip():
-        print('The requesting wallet does NOT have permission to access the secret message.')
-        print(f'str(wallet_addresses_with_permission[0]).strip(): {str(wallet_addresses_with_permission[0]).strip()} | str(requester_wallet_address).strip(): {str(requester_wallet_address).strip()}')
-        print(f'len(requester_wallet_address): {len(requester_wallet_address)} | len(wallet_addresses_with_permission[0]): {len(wallet_addresses_with_permission[0])}')
-        return False
-    else:
+    requester_wallet_address_int = int(requester_wallet_address, 0)
+    wallet_address_with_permission_int = int(wallet_addresses_with_permission[0], 0)
+    print(f'requester_wallet_address_int: {requester_wallet_address_int} | wallet_address_with_permission_int: {wallet_address_with_permission_int}')
+    if requester_wallet_address_int == wallet_address_with_permission_int:
         print('The requesting wallet has permission to access the secret message.')
         return True
+    else:
+        print('The requesting wallet does NOT have permission to access the secret message.')
+        return False
 
 def get_application_binary_interface(contract_file_path):
     with open('compiled_contract.json', 'r') as file:
