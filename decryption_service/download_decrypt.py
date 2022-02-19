@@ -42,7 +42,7 @@ def check_if_requester_has_access(requester_wallet_address):
     deployed_contract = w3.eth.contract(address=deployed_contract_address, abi=application_binary_interface)
     wallet_addresses_with_permission = list(deployed_contract.functions.get_customers().call())
     print(f'wallet_addresses_with_permission: {wallet_addresses_with_permission}')
-    if wallet_addresses_with_permission[0] == requester_wallet_address:
+    if str(wallet_addresses_with_permission[0]) == str(requester_wallet_address):
         print('The requesting wallet has permission to access the secret message.')
         return True
     else:
