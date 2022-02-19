@@ -44,7 +44,7 @@ def check_if_requester_has_access(requester_wallet_address):
         return False
 
 def get_application_binary_interface(contract_file_path):
-    with open('compiled_code.json', 'r') as file:
+    with open('compiled_contract.json', 'r') as file:
         compiled_sol = json.load(file)
     application_binary_interface = compiled_sol['contracts'][contract_file_path]['FilePermissions']['abi']
     return application_binary_interface

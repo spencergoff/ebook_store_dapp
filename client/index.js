@@ -10,15 +10,15 @@ function connect() {
             var api_request = new XMLHttpRequest();
             url = 'https://i4d36m961a.execute-api.us-west-2.amazonaws.com/Prod?address=' + address
             api_request.open('GET', url, true);  // `true` makes the request asynchronous
-            alert('Trying to send api_request to ' + url)
+            console.log('Trying to send api_request to ' + url)
             api_request.send()
-
-            api_request.onload = function () {
-                console.log('Loading...')
-            };
 
             api_request.onprogress = function (event) {
                 console.log('Progressing...')
+            };
+
+            api_request.onload = function () {
+                alert('The secret message is: ' + api_request.responseText)
             };
 
             api_request.onerror = function () {
