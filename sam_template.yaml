@@ -30,7 +30,7 @@ Resources:
         Type: LambdaCanary10Percent1Minute
     Metadata:
       Dockerfile: decryption_service/Dockerfile
-      DockerContext: ./
+      DockerContext: ./decryption_service/
 
 Outputs:
   DownloadFile:
