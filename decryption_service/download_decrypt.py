@@ -29,7 +29,7 @@ def main(event, context):
     return response
 
 def extract_address_from_event(event):
-    address = event['queryStringParameters']['address']
+    address = str(event['queryStringParameters']['address'])
     print(f'Requester address: {address}')
     return address
 
@@ -40,11 +40,13 @@ def check_if_requester_has_access(requester_wallet_address):
     application_binary_interface = get_application_binary_interface(contract_file_path)
     w3 = Web3(Web3.HTTPProvider('https://goerli.infura.io/v3/e5b0c5087555433a8b4e82cc739bc0ab'))
     deployed_contract = w3.eth.contract(address=deployed_contract_address, abi=application_binary_interface)
-    wallet_addresses_with_permission = deployed_contract.functions.get_customers().call()
+    wallet_addresses_with_permission = list(deployed_contract.functions.get_customers().call())
     print(f'wallet_addresses_with_permission: {wallet_addresses_with_permission}')
-    if str(requester_wallet_address) in wallet_addresses_with_permission:
+    if requester_wallet_address in wallet_addresses_with_permission:
+        print('The requesting wallet has permission to access the secret message.')
         return True
     else:
+        print('The requesting wallet does NOT have permission to access the secret message.')
         return False
 
 def get_application_binary_interface(contract_file_path):
