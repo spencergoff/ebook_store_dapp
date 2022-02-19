@@ -15,7 +15,7 @@ def main(event, context):
         decrypted_message = decrypt_content_with_key(content_id, key)
         body = f'The secret message is: {decrypted_message}'
     else:
-        body = 'You don\t have access to view the secret message. Try sending eth to 0x0147fe45f5d96a6d0055bc89721f25da514e6aac'
+        body = 'You do not have access to view the secret message. Try sending 1000 wei to 0x0147fe45f5d96a6d0055bc89721f25da514e6aac'
     headers = {
         'Access-Control-Allow-Origin': 'http://ebookstoredappbucket.s3-website-us-west-2.amazonaws.com'
     }
@@ -42,12 +42,12 @@ def check_if_requester_has_access(requester_wallet_address):
     deployed_contract = w3.eth.contract(address=deployed_contract_address, abi=application_binary_interface)
     wallet_addresses_with_permission = list(deployed_contract.functions.get_customers().call())
     print(f'wallet_addresses_with_permission: {wallet_addresses_with_permission}')
-    if str(wallet_addresses_with_permission[0]) == str(requester_wallet_address):
+    if str(wallet_addresses_with_permission[0])[2:] == str(requester_wallet_address)[2:]:
         print('The requesting wallet has permission to access the secret message.')
         return True
     else:
         print('The requesting wallet does NOT have permission to access the secret message.')
-        print(f'requester_wallet_address: {requester_wallet_address} | wallet_addresses_with_permission[0]: {wallet_addresses_with_permission[0]}')
+        print(f'requester_wallet_address[2:]: {requester_wallet_address[2:]} | wallet_addresses_with_permission[0][2:]: {wallet_addresses_with_permission[0][2:]}')
         return False
 
 def get_application_binary_interface(contract_file_path):
