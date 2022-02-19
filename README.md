@@ -1,10 +1,12 @@
 # Smart Contract
 
-The core of this project is a smart contract that is written in Solidity and deployed to the Ethereum-based testnet Görli.
+The core of this project is a smart contract written in Solidity and deployed to the Ethereum-based testnet Görli.
 
-The smart contract is defined in contract/permissions.sol.
+The contract accepts payments in Eth and if the amount sent is at least 1000 wei, then the sender obtains permission to see the secret message (more on this later). 
 
-At the time of this writing, info about the latest deployment can be found at https://goerli.etherscan.io/address/0x0147fe45f5d96a6d0055bc89721f25da514e6aac.
+There are functions that allow other services to check the balance of the contract, get the list of customers (i.e. the wallet addresses with permission to see the secret message), and deposit Eth.
+
+This smart contract is defined in contract/permissions.sol. At the time of this writing, info about the latest deployment can be found at https://goerli.etherscan.io/address/0x0147fe45f5d96a6d0055bc89721f25da514e6aac.
 
 # Decryption Service
 
