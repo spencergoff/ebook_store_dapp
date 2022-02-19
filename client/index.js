@@ -18,7 +18,7 @@ function connect() {
             };
 
             api_request.onload = function () {
-                alert('The secret message is: ' + api_request.responseText)
+                alert(api_request.responseText)
             };
 
             api_request.onerror = function () {
