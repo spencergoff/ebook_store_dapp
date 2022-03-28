@@ -35,4 +35,13 @@ contract FilePermissions {
         return address(this).balance;
     }
 
+    function remove_self_from_customers() external {
+        for (uint256 i = 0; i < customers.length; i++) {
+            if (customers[i] == msg.sender) {
+                delete customers[i];
+                break;
+            }
+        }
+    }
+
 }
