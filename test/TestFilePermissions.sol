@@ -10,8 +10,16 @@ contract TestFilePermissions {
     uint public initialBalance = 1 ether;
     event LogAddressArray(string arrayName, address[] addressArray);
     event LogOwner(address payable owner);
+    event LogUint(string varName, uint varValue);
     FilePermissions filePermissions = FilePermissions(DeployedAddresses.FilePermissions());
     
+    function testNewContract_whenCheckingBalance_shouldBeZero() public {
+        uint actualBalance = address(filePermissions).balance;
+        uint expectedBalance = 0;
+        emit LogUint("actualBalance", actualBalance);
+        Assert.equal(actualBalance, expectedBalance, "Error: Initial contract balance was not 0.");
+    }
+
     function testNewSender_whenSendingSufficientFunds_shouldBeAddedToCustomers() public {
         filePermissions.deposit{value:1002}();
         address[] memory actualCustomers = filePermissions.get_customers();
@@ -32,4 +40,5 @@ contract TestFilePermissions {
         emit LogAddressArray("expectedCustomers", expectedCustomers);
         Assert.equal(actualCustomers, expectedCustomers, "Error: Unpaid customer was added to customers[]");
     }
+
 }

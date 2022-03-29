@@ -18,9 +18,9 @@ contract FilePermissions {
         }
     }
 
-    function is_customer(address sender_address) private view returns (bool) {
+    function is_customer(address wallet_address) private view returns (bool) {
         for (uint256 i = 0; i < customers.length; i++) {
-            if (customers[i] == sender_address) {
+            if (customers[i] == wallet_address) {
                 return true;
             }
         }
